@@ -37,6 +37,12 @@ public class PecaDama extends Peca {
 				
 		}
 		
+		if(capturou_no_movimento) {  //verificar se eh somente uma posicao depois de ter capturado
+			int diferencaI_cap = (id-iCap>=0)?(id - iCap):(iCap - id);               
+			int diferencaJ_cap = (jd-jCap>=0)?(jd - jCap):(jCap - jd);
+			if(diferencaI_cap > 1 || diferencaJ_cap > 1) return false; //destino so pode ser uma casa depois de ter capturado
+		}
+		
 		return true;
 	}
 	
