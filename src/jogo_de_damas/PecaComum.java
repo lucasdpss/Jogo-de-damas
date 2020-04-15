@@ -49,7 +49,7 @@ public class PecaComum extends Peca {
 				t.setPeca(id, jd, promovida);
 			}
 			if(this.getCor() == 'B' && id == 0) {           //Coroacao das brancas
-				PecaDama promovida = new PecaDama('P',id,jd,t);
+				PecaDama promovida = new PecaDama('B',id,jd,t);
 				t.setPeca(id, jd, promovida);
 			}
 		}
