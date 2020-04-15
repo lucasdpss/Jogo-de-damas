@@ -13,7 +13,7 @@ public class PecaComum extends Peca {
 		if(diferencaI != diferencaJ) return false; //Precisa ser sempre diagonal
 		if(diferencaI > 2) return false;  //Move no maximo 2 posicoes em cada direcao
 		if(diferencaI == 0) return false; //Nao pode ficar parado
-		
+		if(id >= 8 || jd >= 8) return false; //Destino deve estar dentro do tabuleiro
 		if(t.getPeca(id, jd) != null) return false; //Destino deve estar vazio
 		
 		if(diferencaI == 1) {
@@ -21,7 +21,7 @@ public class PecaComum extends Peca {
 			if(this.getCor() == 'P' && id < iPos) return false;
 		}
 		else if(diferencaI == 2) {
-			Peca capturada = t.getPeca((iPos+id)/2, (jPos+jd)/2);
+			Peca capturada = t.getPeca((iPos+id)/2, (jPos+jd)/2); 
 			if(capturada == null) return false; //Precisa ter uma peca a ser capturada
 			if(capturada.getCor() == this.getCor()) return false; //Essa peca precisa ser de cor diferente
 		}
@@ -43,6 +43,14 @@ public class PecaComum extends Peca {
 				t.setPeca(iPos, jPos, null);
 				iPos = id;
 				jPos = jd;
+			}
+			if(this.getCor() == 'P' && id == 7) {          //Coroacao das pretas
+				PecaDama promovida = new PecaDama('P',id,jd,t);
+				t.setPeca(id, jd, promovida);
+			}
+			if(this.getCor() == 'B' && id == 0) {           //Coroacao das brancas
+				PecaDama promovida = new PecaDama('P',id,jd,t);
+				t.setPeca(id, jd, promovida);
 			}
 		}
 	}
