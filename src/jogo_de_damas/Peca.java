@@ -1,9 +1,22 @@
 package jogo_de_damas;
 
 public class Peca {
-	char cor;
+	private char cor;
+	protected int iPos, jPos;
+	protected Tabuleiro t;
 	
-	public boolean mov_valido(int i_destino,int j_destino) { //recebe a posicao de destino da matriz
-		return false;
+	public Peca(char cor, int i, int j, Tabuleiro t){
+		this.cor = cor;
+		iPos = i;
+		jPos = j;
+		this.t = t;
+	}
+	
+	public void mover(int id,int jd) { //recebe a posicao de destino da matriz
+		return;
+	}
+	
+	public char getCor(){
+		return cor;
 	}
 }
