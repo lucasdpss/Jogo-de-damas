@@ -1,8 +1,6 @@
 package jogo_de_damas;
 
 public class PecaDama extends Peca { 
-	
-	private boolean capturou_no_movimento;    //perguntar se esse nome de variavel segue as regras de boas praticas
 	private int iCap;        //i capturado
 	private int jCap;        //j capturado
 	
@@ -10,7 +8,7 @@ public class PecaDama extends Peca {
 		super(cor, i, j, t);
 	}
 	
-	private boolean mov_valido(int id, int jd) { //recebe a posicao de destino na matriz
+	public boolean mov_valido(int id, int jd) { //recebe a posicao de destino na matriz
 		int diferencaI = (id-iPos>=0)?(id-iPos):(iPos-id);
 		int diferencaJ = (jd-jPos>=0)?(jd-jPos):(jPos-jd);
 		capturou_no_movimento = false;
@@ -37,11 +35,11 @@ public class PecaDama extends Peca {
 				
 		}
 		
-		if(capturou_no_movimento) {  //verificar se eh somente uma posicao depois de ter capturado
+		/*if(capturou_no_movimento) {  //verificar se eh somente uma posicao depois de ter capturado
 			int diferencaI_cap = (id-iCap>=0)?(id - iCap):(iCap - id);               
 			int diferencaJ_cap = (jd-jCap>=0)?(jd - jCap):(jCap - jd);
 			if(diferencaI_cap > 1 || diferencaJ_cap > 1) return false; //destino so pode ser uma casa depois de ter capturado
-		}
+		}*/
 		
 		return true;
 	}

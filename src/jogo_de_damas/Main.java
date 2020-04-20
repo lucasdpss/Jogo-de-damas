@@ -4,7 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		CSVReader csv = new CSVReader();
-		csv.setDataSource("src\\movimentos.csv");
+		csv.setDataSource("src\\jogo_completo.csv");
 		String commands[] = csv.requestCommands();
 		
 		Tabuleiro t = new Tabuleiro();
@@ -22,7 +22,29 @@ public class Main {
 			int jd = commands[i].charAt(3) - 'a';    //j destino
 			
 			Peca pecaAtual = t.getPeca(ii, ji);
-			if(pecaAtual != null) pecaAtual.mover(id, jd); 
+			if(pecaAtual != null) {
+				if(pecaAtual.getCor() != t.getlance()) {
+					if(pecaAtual.mov_valido(id, jd) && pecaAtual.getCapturou_no_movimento()) {
+						//System.out.println("flag de um lance longo");
+						pecaAtual.mover(id,jd);
+						t.mostrar();
+						System.out.println();
+						continue;
+					}else {
+						System.out.println("Nao eh sua vez ainda\n");
+						continue;
+					}
+				}
+				if(pecaAtual.mov_valido(id, jd)) {
+					pecaAtual.mover(id,jd);
+					t.mudaJogador();
+				}else {
+					System.out.println("Movimento invalido");
+				}
+				
+			}else {
+				System.out.println("posicao vazia, nao ha peca nessa posicao");
+			}
 			
 			t.mostrar();
 			System.out.println();

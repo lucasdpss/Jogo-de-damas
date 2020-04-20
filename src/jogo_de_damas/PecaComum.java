@@ -6,9 +6,10 @@ public class PecaComum extends Peca {
 		super(cor, i, j, t);
 	}
 	
-	private boolean mov_valido(int id,int jd) {
+	public boolean mov_valido(int id,int jd) {
 		int diferencaI = (id-iPos>=0)?(id-iPos):(iPos-id);
 		int diferencaJ = (jd-jPos>=0)?(jd-jPos):(jPos-jd);
+		capturou_no_movimento = false;
 		
 		if(diferencaI != diferencaJ) return false; //Precisa ser sempre diagonal
 		if(diferencaI > 2) return false;  //Move no maximo 2 posicoes em cada direcao
@@ -24,6 +25,7 @@ public class PecaComum extends Peca {
 			Peca capturada = t.getPeca((iPos+id)/2, (jPos+jd)/2); 
 			if(capturada == null) return false; //Precisa ter uma peca a ser capturada
 			if(capturada.getCor() == this.getCor()) return false; //Essa peca precisa ser de cor diferente
+			capturou_no_movimento = true;
 		}
 		return true;
 	}
@@ -54,5 +56,6 @@ public class PecaComum extends Peca {
 			}
 		}
 	}
+	
 }
 
