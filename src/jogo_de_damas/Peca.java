@@ -1,9 +1,32 @@
 package jogo_de_damas;
 
 public class Peca {
-	char cor;
+	private char cor;
+	protected int iPos, jPos;
+	protected Tabuleiro t;
+	protected boolean capturou_no_movimento;
 	
-	public boolean mov_valido(String destino) { //recebe uma string "f4" destino
+	public Peca(char cor, int i, int j, Tabuleiro t){
+		this.cor = cor;
+		iPos = i;
+		jPos = j;
+		this.t = t;
+	}
+	
+	public void mover(int id,int jd) { //recebe a posicao de destino da matriz
+		return;
+	}
+	
+	public boolean mov_valido(int i,int j) {
+		System.out.println("Isso nao era pra ser impresso");
 		return false;
+	}
+	
+	public char getCor(){
+		return cor;
+	}
+	
+	public boolean getCapturou_no_movimento() {
+		return capturou_no_movimento;
 	}
 }
