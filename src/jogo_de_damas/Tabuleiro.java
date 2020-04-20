@@ -56,10 +56,6 @@ public class Tabuleiro {
 		this.lance = lance;
 	}
 	
-	public char getCor(int i,int j) {
-		return matriz[i][j].getCor();
-	}
-	
 	public void mudaJogador() {
 		if(lance == 'P') setLance('B');
 		else setLance('P');
