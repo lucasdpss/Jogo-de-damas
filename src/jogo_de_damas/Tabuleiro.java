@@ -7,6 +7,7 @@ public class Tabuleiro {
 	private int pecasPretas;
 	private boolean brancasVenceram;
 	private boolean pretasVenceram;
+	private boolean ultimaPecaCapturouNoMovimento;
 	
 	public Tabuleiro(){
 		pecasBrancas = 12;
@@ -72,6 +73,19 @@ public class Tabuleiro {
 		else return 'N';
 	}
 	
+	public boolean testarFimDeJogo() {
+		switch(this.getVencedor()) {
+		case 'B':
+			System.out.println("Brancas venceram!");
+			return true;
+		case 'P':
+			System.out.println("Pretas venceram!");
+			return true;
+		default:
+			return false;
+		}
+	}
+	
 	//funcoes para controlar o lance:
 	public char getlance() {
 		return lance;
@@ -86,4 +100,12 @@ public class Tabuleiro {
 		else setLance('P');
 	}
 	//fim das funcoes para controlar o lance
+	
+	public void setUltimaPecaCapturouNoMovimento(boolean capturou) {
+		ultimaPecaCapturouNoMovimento = capturou;
+	}
+	
+	public boolean getUltimaPecaCapturouNoMovimento() {
+		return ultimaPecaCapturouNoMovimento;
+	}
 }

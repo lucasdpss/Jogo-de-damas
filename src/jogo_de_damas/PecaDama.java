@@ -15,7 +15,7 @@ public class PecaDama extends Peca {
 		
 		if(diferencaI != diferencaJ) return false; //Precisa ser sempre diagonal
 		if(diferencaI == 0) return false; //Nao pode ficar parado
-		if(id >= 8 || jd >= 8) return false; //Destino deve estar dentro do tabuleiro
+		if(id >= 8 || jd >= 8 || id < 0 || jd < 0) return false; //Destino deve estar dentro do tabuleiro
 		if(t.getPeca(id, jd) != null) return false; //Destino deve estar vazio
 		
 		//Duas possibilidades agora: 1)ela anda na diagonal (pelo menos uma casa),sem ter peca no meio
@@ -59,4 +59,23 @@ public class PecaDama extends Peca {
 		else return false;
 	}
 	
+	    //retorna 1 se tem algum mov.valido sem captura obrigatoria e 2 se tem algum movimento valido e tem captura obrigatoria
+		public int algumMovimentoValido() {   //retorna 0 se nao tem movimento nenhum valido
+			boolean captura_obrigatoria = false;
+			boolean tem_movimento_valido = false;
+			
+			//testar todos os possiveis movimentos nas duas diagonais da peca
+			for(int id = this.iPos - 7,jd = this.jPos - 7;id <= this.iPos+7 && jd <= this.jPos+7 ;id++,jd++) {
+				if(id == this.iPos && jd == this.jPos) continue;
+				if(this.mov_valido(id, jd)) {
+					tem_movimento_valido = true;
+					if(this.capturou_no_movimento) captura_obrigatoria = true;
+				}
+			}
+			if(tem_movimento_valido) 
+				return (captura_obrigatoria)? 2 : 1;
+			else
+				return 0;
+		}
+		
 }
