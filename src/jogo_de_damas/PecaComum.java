@@ -30,13 +30,14 @@ public class PecaComum extends Peca {
 		return true;
 	}
 	
-	public void mover(int id,int jd) { //recebe a posicao de destino na matriz
+	public boolean mover(int id,int jd) { //recebe a posicao de destino na matriz
 		if(this.mov_valido(id, jd)) {
 			int diferencaI = (id-iPos>=0)?(id-iPos):(iPos-id);
 			int diferencaJ = (jd-jPos>=0)?(jd-jPos):(jPos-jd);
 			if(diferencaI == 2 && diferencaJ == 2) { //caso em que ha peca no meio
 				t.setPeca(id, jd, this);
 				t.setPeca(iPos, jPos, null);
+				t.registrarCaptura(t.getPeca((iPos+id)/2, (jPos+jd)/2));
 				t.setPeca((iPos+id)/2, (jPos+jd)/2, null);
 				iPos = id;
 				jPos = jd;
@@ -54,7 +55,10 @@ public class PecaComum extends Peca {
 				PecaDama promovida = new PecaDama('B',id,jd,t);
 				t.setPeca(id, jd, promovida);
 			}
+			return true;
 		}
+		else return false;
+	
 	}
 	
 }

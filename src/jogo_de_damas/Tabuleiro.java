@@ -3,8 +3,16 @@ package jogo_de_damas;
 public class Tabuleiro {
 	private Peca matriz[][];
 	private char lance;
+	private int pecasBrancas;
+	private int pecasPretas;
+	private boolean brancasVenceram;
+	private boolean pretasVenceram;
 	
 	public Tabuleiro(){
+		pecasBrancas = 12;
+		pecasPretas = 12;
+		brancasVenceram = false;
+		pretasVenceram = false;
 		matriz = new Peca[8][8];
 		lance = 'B';   //o jogo deve comecar pelas brancas (no caso de teste comeca pelas pretas)
 		
@@ -45,6 +53,23 @@ public class Tabuleiro {
 	
 	public void setPeca(int i, int j, Peca p) {
 		matriz[i][j] = p;
+	}
+	
+	public void registrarCaptura(Peca capturada) {
+		if(capturada.getCor() == 'B') {
+			pecasBrancas--;
+			if(pecasBrancas <= 0) pretasVenceram = true;
+		}
+		else {
+			pecasPretas--;
+			if(pecasPretas <= 0) brancasVenceram = true;
+		}
+	}
+	
+	public char getVencedor() {
+		if(brancasVenceram) return 'B';
+		else if(pretasVenceram) return 'P';
+		else return 'N';
 	}
 	
 	//funcoes para controlar o lance:

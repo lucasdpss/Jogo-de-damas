@@ -13,8 +13,8 @@ public class Peca {
 		this.t = t;
 	}
 	
-	public void mover(int id,int jd) { //recebe a posicao de destino da matriz
-		return;
+	public boolean mover(int id,int jd) { //recebe a posicao de destino da matriz
+		return false;
 	}
 	
 	public boolean mov_valido(int i,int j) {

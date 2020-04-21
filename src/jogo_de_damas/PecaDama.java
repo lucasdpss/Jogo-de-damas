@@ -35,21 +35,16 @@ public class PecaDama extends Peca {
 				
 		}
 		
-		/*if(capturou_no_movimento) {  //verificar se eh somente uma posicao depois de ter capturado
-			int diferencaI_cap = (id-iCap>=0)?(id - iCap):(iCap - id);               
-			int diferencaJ_cap = (jd-jCap>=0)?(jd - jCap):(jCap - jd);
-			if(diferencaI_cap > 1 || diferencaJ_cap > 1) return false; //destino so pode ser uma casa depois de ter capturado
-		}*/
-		
 		return true;
 	}
 	
 	
-	public void mover(int id,int jd) { //recebe a posicao de destino na matriz
+	public boolean mover(int id,int jd) { //recebe a posicao de destino na matriz
 		if(this.mov_valido(id, jd)) {
 			if(capturou_no_movimento) {
 				t.setPeca(id, jd, this);
 				t.setPeca(iPos, jPos, null);
+				t.registrarCaptura(t.getPeca(iCap, jCap));
 				t.setPeca(iCap, jCap, null);  //tira do tabuleiro a capturada
 				iPos = id;
 				jPos = jd;
@@ -59,7 +54,9 @@ public class PecaDama extends Peca {
 				iPos = id;
 				jPos = jd;
 			}
+			return true;
 		}
+		else return false;
 	}
 	
 }
