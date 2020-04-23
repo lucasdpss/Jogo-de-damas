@@ -4,9 +4,20 @@ public class Tabuleiro {
 	private Peca matriz[][];
 	private char lance;
 	
+	private int pecasBrancas;
+	private int pecasPretas;
+	private boolean brancasVenceram;
+	private boolean pretasVenceram;
+	
+	private boolean ultimaPecaCapturouNoMovimento;
+	
 	public Tabuleiro(){
+		pecasBrancas = 12;
+		pecasPretas = 12;
+		brancasVenceram = false;
+		pretasVenceram = false;
 		matriz = new Peca[8][8];
-		lance = 'B';   //o jogo deve comecar pelas brancas (no caso de teste comeca pelas pretas)
+		lance = 'B';   //o jogo deve comecar pelas brancas
 		
 		for(int i=0;i < 8;i++) {
 			for(int j=0;j < 8;j++) {
@@ -31,7 +42,7 @@ public class Tabuleiro {
 				if(matriz[i][j] == null) {
 					System.out.print(" -");
 				}else {
-					System.out.print(" " + matriz[i][j].getCor());
+					System.out.print(" " + matriz[i][j].getCaractere());
 				}
 			}
 			System.out.println();
@@ -47,6 +58,36 @@ public class Tabuleiro {
 		matriz[i][j] = p;
 	}
 	
+	public void registrarCaptura(Peca capturada) {
+		if(capturada.getCor() == 'B') {
+			pecasBrancas--;
+			if(pecasBrancas <= 0) pretasVenceram = true;
+		}
+		else {
+			pecasPretas--;
+			if(pecasPretas <= 0) brancasVenceram = true;
+		}
+	}
+	
+	public char getVencedor() {
+		if(brancasVenceram) return 'B';
+		else if(pretasVenceram) return 'P';
+		else return 'N';
+	}
+	
+	public boolean testarFimDeJogo() {
+		switch(this.getVencedor()) {
+		case 'B':
+			System.out.println("Brancas venceram!");
+			return true;
+		case 'P':
+			System.out.println("Pretas venceram!");
+			return true;
+		default:
+			return false;
+		}
+	}
+	
 	//funcoes para controlar o lance:
 	public char getlance() {
 		return lance;
@@ -56,13 +97,17 @@ public class Tabuleiro {
 		this.lance = lance;
 	}
 	
-	public char getCor(int i,int j) {
-		return matriz[i][j].getCor();
-	}
-	
 	public void mudaJogador() {
 		if(lance == 'P') setLance('B');
 		else setLance('P');
 	}
 	//fim das funcoes para controlar o lance
+	
+	public void setUltimaPecaCapturouNoMovimento(boolean capturou) {
+		ultimaPecaCapturouNoMovimento = capturou;
+	}
+	
+	public boolean getUltimaPecaCapturouNoMovimento() {
+		return ultimaPecaCapturouNoMovimento;
+	}
 }
