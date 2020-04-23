@@ -5,6 +5,6 @@
   - Antonio Gabriel da Silva Fernandes - RA: 231551
   
   
-  Na pasta /src há o "movimentos.csv", arquivo utilizado para determinar o movimento das peças.
+  Na pasta /src há o "jogo.csv", arquivo utilizado para determinar o movimento das peças.
   As classes estão no pacote "jogo_de_damas"
  
