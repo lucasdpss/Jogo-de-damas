@@ -76,6 +76,9 @@ public class Tabuleiro {
 	}
 	
 	public boolean testarFimDeJogo() {
+		
+		
+		
 		switch(this.getVencedor()) {
 		case 'B':
 			System.out.println("Brancas venceram!");
@@ -110,4 +113,36 @@ public class Tabuleiro {
 	public boolean getUltimaPecaCapturouNoMovimento() {
 		return ultimaPecaCapturouNoMovimento;
 	}
+	
+	
+	//Funcao procuraMovimento(cor):
+	//Retorna 2 caso a peca da cor indicada possui movimento valido e tenha captura obrigatoria
+	//Retorna 1 caso a peca da cor indicada possui movimento valido e nao tenha captura obrigatoria
+	//Retorna 0 caso a peca da cor indica nao possua movimento valido
+	public int procuraMovimento(char cor) {
+		boolean tem_captura_obrigatoria = false;
+		boolean tem_movimento_valido = false;
+
+		for(int u=0;u <= 7;u++) {  //percorre toda a matriz, atencao aqui pode modificar se a ultima peca capturou ou nao
+			for(int v=0;v <= 7;v++) {
+				int estado = 0;
+				if(this.getPeca(u,v) != null && this.getPeca(u, v).getCor() == cor) {
+					estado = this.getPeca(u,v).algumMovimentoValido();
+					//System.out.println(estado);
+				}
+				if(estado == 1) {
+					tem_movimento_valido = true;
+				}else if(estado == 2) {
+					tem_movimento_valido = true;
+					tem_captura_obrigatoria = true;
+				}
+			}
+		}
+
+		if(tem_movimento_valido) 
+			return (tem_captura_obrigatoria)? 2 : 1;
+		else
+			return 0;
+	}
+	
 }
