@@ -6,6 +6,7 @@ public class PecaDama extends Peca {
 	
 	public PecaDama(char cor, int i, int j, Tabuleiro t){
 		super(cor, i, j, t);
+		this.setCaractere(cor);
 	}
 	
 	public boolean mov_valido(int id, int jd) { //recebe a posicao de destino na matriz
@@ -59,23 +60,31 @@ public class PecaDama extends Peca {
 		else return false;
 	}
 	
-	    //retorna 1 se tem algum mov.valido sem captura obrigatoria e 2 se tem algum movimento valido e tem captura obrigatoria
-		public int algumMovimentoValido() {   //retorna 0 se nao tem movimento nenhum valido
-			boolean captura_obrigatoria = false;
-			boolean tem_movimento_valido = false;
-			
-			//testar todos os possiveis movimentos nas duas diagonais da peca
-			for(int id = this.iPos - 7,jd = this.jPos - 7;id <= this.iPos+7 && jd <= this.jPos+7 ;id++,jd++) {
-				if(id == this.iPos && jd == this.jPos) continue;
-				if(this.mov_valido(id, jd)) {
-					tem_movimento_valido = true;
-					if(this.capturou_no_movimento) captura_obrigatoria = true;
-				}
+    //retorna 1 se tem algum mov.valido sem captura obrigatoria e 2 se tem algum movimento valido e tem captura obrigatoria
+	public int algumMovimentoValido() {   //retorna 0 se nao tem movimento nenhum valido
+		boolean captura_obrigatoria = false;
+		boolean tem_movimento_valido = false;
+		
+		//testar todos os possiveis movimentos nas duas diagonais da peca
+		for(int id = this.iPos - 7,jd = this.jPos - 7;id <= this.iPos+7 && jd <= this.jPos+7 ;id++,jd++) {
+			if(id == this.iPos && jd == this.jPos) continue;
+			if(this.mov_valido(id, jd)) {
+				tem_movimento_valido = true;
+				if(this.capturou_no_movimento) captura_obrigatoria = true;
 			}
-			if(tem_movimento_valido) 
-				return (captura_obrigatoria)? 2 : 1;
-			else
-				return 0;
 		}
+		for(int id = this.iPos - 7,jd = this.jPos + 7;id <= this.iPos+7 && jd >= this.jPos-7 ;id++,jd--) {
+			if(id == this.iPos && jd == this.jPos) continue;
+			if(this.mov_valido(id, jd)) {
+				tem_movimento_valido = true;
+				if(this.capturou_no_movimento) captura_obrigatoria = true;
+			}
+		}
+		
+		if(tem_movimento_valido) 
+			return (captura_obrigatoria)? 2 : 1;
+		else
+			return 0;
+	}
 		
 }

@@ -74,6 +74,14 @@ public class PecaComum extends Peca {
 				if(this.capturou_no_movimento) captura_obrigatoria = true;
 			}
 		}
+		for(int id = this.iPos - 2,jd = this.jPos + 2;id <= this.iPos+2 && jd >= this.jPos-2 ;id++,jd--) {
+			if(id == this.iPos && jd == this.jPos) continue;
+			if(this.mov_valido(id, jd)) {
+				tem_movimento_valido = true;
+				if(this.capturou_no_movimento) captura_obrigatoria = true;
+			}
+		}
+		
 		if(tem_movimento_valido) 
 			return (captura_obrigatoria)? 2 : 1;
 		else

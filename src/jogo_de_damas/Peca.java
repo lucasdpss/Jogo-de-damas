@@ -1,7 +1,7 @@
 package jogo_de_damas;
 
 public class Peca {
-	private char cor;
+	private char cor, caractere;
 	protected int iPos, jPos;
 	protected Tabuleiro t;
 	protected boolean capturou_no_movimento;
@@ -9,6 +9,7 @@ public class Peca {
 	
 	public Peca(char cor, int i, int j, Tabuleiro t){
 		this.cor = cor;
+		this.caractere = (char) (cor + 32); //Minuscula
 		iPos = i;
 		jPos = j;
 		this.t = t;
@@ -25,6 +26,14 @@ public class Peca {
 	
 	public char getCor(){
 		return cor;
+	}
+	
+	public char getCaractere() {
+		return caractere;
+	}
+	
+	public void setCaractere(char caractere) {
+		this.caractere = caractere;
 	}
 	
 	public boolean getCapturou_no_movimento() {

@@ -3,10 +3,12 @@ package jogo_de_damas;
 public class Tabuleiro {
 	private Peca matriz[][];
 	private char lance;
+	
 	private int pecasBrancas;
 	private int pecasPretas;
 	private boolean brancasVenceram;
 	private boolean pretasVenceram;
+	
 	private boolean ultimaPecaCapturouNoMovimento;
 	
 	public Tabuleiro(){
@@ -15,7 +17,7 @@ public class Tabuleiro {
 		brancasVenceram = false;
 		pretasVenceram = false;
 		matriz = new Peca[8][8];
-		lance = 'B';   //o jogo deve comecar pelas brancas (no caso de teste comeca pelas pretas)
+		lance = 'B';   //o jogo deve comecar pelas brancas
 		
 		for(int i=0;i < 8;i++) {
 			for(int j=0;j < 8;j++) {
@@ -40,7 +42,7 @@ public class Tabuleiro {
 				if(matriz[i][j] == null) {
 					System.out.print(" -");
 				}else {
-					System.out.print(" " + matriz[i][j].getCor());
+					System.out.print(" " + matriz[i][j].getCaractere());
 				}
 			}
 			System.out.println();
