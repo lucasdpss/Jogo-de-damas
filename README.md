@@ -1,6 +1,6 @@
 # Jogo-de-damas
-  Trabalho MC322
-  
+  Trabalho MC322 <br/>
+  Nome do Grupo: Objetos Desorientados
   - Lucas de Paula Soares - RA: 201867<br/>
   - Antonio Gabriel da Silva Fernandes - RA: 231551
   
